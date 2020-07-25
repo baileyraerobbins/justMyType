@@ -1,5 +1,3 @@
-
-//Display sentences
 let sentences = [
     'ten ate neite ate nee enet ite ate inet ent eate',
     'Too ato too nOt enot one totA not anot tOO aNot',
@@ -7,237 +5,90 @@ let sentences = [
     'itant eate anot eat nato inate eat anot tain eat',
     'nee ene ate ite tent tiet ent ine ene ete ene ate'
 ];
-let arrayNumber = 0;
-let sentence = sentences[arrayNumber];
+let sentenceNumber = 0; //sentence incrementer
+let sentence = sentences[sentenceNumber];
+let targetSentence = $('#sentence') 
+let letterNumber = 0; //letter incrementer
+let letter = sentence.substring(letterNumber, letterNumber + 1);
+let targetLetter = $('#target-letter');
+let highlight = $("#white-block");
+let highlightPosition = 0;
+let mistakes = 0;
+let timeClock = false; //time counter for wpm
+let startDate;
+let startTime;
 
+$(highlight).css('background-color', 'grey'); //display highlight box as grey
+$(targetSentence).text(sentence); //display sentence
+$(targetLetter).text(letter); //display large letter
+$('#keyboard-upper-container').hide(); //hide uppercase board
 
-$('#sentence').text(sentence);
-
-//Move yellow square on correct letter
-$(document).keydown(function (e1) {
-    if(e1.which == 69){
-        $('#yellow-block').css('margin-left','10px')
-    } else if (e1.which == 78) {
-        $('#yellow-block').css('margin-left','35px')
-    } else if (e1.which == 65) {
-        $('#yellow-block').css('margin-left','62px')
-    } else if (e1.which == 84) {
-        $('#yellow-block').css('margin-left','78px')
+//TOGGLE UPPER/LOWER KEYBOARDS USING SHIFT
+$(document).keydown(function (shift) { 
+    if (shift.which == 16) { //if shift key is pressed down ...
+        $('#keyboard-upper-container').show(); //show uppercase board
+        $('#keyboard-lower-container').hide(); //hide lowercase board
     }
-})
-
-// Uppercase board hidden in CSS
-$('#keyboard-upper-container').hide();
-
-//while shift key is held down, hide the lowercase board and show uppercase one
-$(document).keydown(function (e) {
-    if (e.which == 16) {
-        $('#keyboard-upper-container').show();
-        $('#keyboard-lower-container').hide();
-    } else if (e.which == 192) {
-        $('#96').css('background-color', 'pink');
-    } else if (e.which == 49) {
-        $('#49').css('background-color', 'pink');
-    } else if (e.which == 50) {
-        $('#50').css('background-color', 'pink');
-    } else if (e.which == 51) {
-        $('#51').css('background-color', 'pink');
-    } else if (e.which == 52) {
-        $('#52').css('background-color', 'pink');
-    } else if (e.which == 53) {
-        $('#53').css('background-color', 'pink');
-    } else if (e.which == 54) {
-        $('#54').css('background-color', 'pink');
-    } else if (e.which == 55) {
-        $('#55').css('background-color', 'pink');
-    } else if (e.which == 81) {
-        $('#113').css('background-color', 'pink');
-    } else if (e.which == 87) {
-        $('#119').css('background-color', 'pink');
-    } else if (e.which == 69) {
-        $('#101').css('background-color', 'pink');
-    } else if (e.which == 82) {
-        $('#114').css('background-color', 'pink');
-    } else if (e.which == 84) {
-        $('#116').css('background-color', 'pink');
-    } else if (e.which == 89) {
-        $('#121').css('background-color', 'pink');
-    } else if (e.which == 85) {
-        $('#117').css('background-color', 'pink');
-    } else if (e.which == 73) {
-        $('#105').css('background-color', 'pink');
-    } else if (e.which == 79) {
-        $('#111').css('background-color', 'pink');
-    } else if (e.which == 80) {
-        $('#112').css('background-color', 'pink');
-    } else if (e.which == 219) {
-        $('#91').css('background-color', 'pink');
-    } else if (e.which == 221) {
-        $('#93').css('background-color', 'pink');
-    } else if (e.which == 220) {
-        $('#92').css('background-color', 'pink');
-    } else if (e.which == 57) {
-        $('#57').css('background-color', 'pink');
-    } else if (e.which == 48) {
-        $('#48').css('background-color', 'pink');
-    } else if (e.which == 189) {
-        $('#45').css('background-color', 'pink');
-    } else if (e.which == 187) {
-        $('#61').css('background-color', 'pink');
-    } else if (e.which == 56) {
-        $('#56').css('background-color', 'pink');
-    } else if (e.which == 57) {
-        $('#57').css('background-color', 'pink');
-    } else if (e.which == 65) {
-        $('#97').css('background-color', 'pink');
-    } else if (e.which == 83) {
-        $('#115').css('background-color', 'pink');
-    } else if (e.which == 68) {
-        $('#100').css('background-color', 'pink');
-    } else if (e.which == 70) {
-        $('#102').css('background-color', 'pink');
-    } else if (e.which == 71) {
-        $('#103').css('background-color', 'pink');
-    } else if (e.which == 72) {
-        $('#104').css('background-color', 'pink');
-    } else if (e.which == 74) {
-        $('#106').css('background-color', 'pink');
-    } else if (e.which == 75) {
-        $('#107').css('background-color', 'pink');
-    } else if (e.which == 76) {
-        $('#108').css('background-color', 'pink');
-    } else if (e.which == 186) {
-        $('#59').css('background-color', 'pink');
-    } else if (e.which == 222) {
-        $('#39').css('background-color', 'pink');
-    } else if (e.which == 90) {
-        $('#122').css('background-color', 'pink');
-    } else if (e.which == 88) {
-        $('#120').css('background-color', 'pink');
-    } else if (e.which == 67) {
-        $('#99').css('background-color', 'pink');
-    } else if (e.which == 86) {
-        $('#118').css('background-color', 'pink');
-    } else if (e.which == 66) {
-        $('#98').css('background-color', 'pink');
-    } else if (e.which == 78) {
-        $('#110').css('background-color', 'pink');
-    } else if (e.which == 77) {
-        $('#109').css('background-color', 'pink');
-    } else if (e.which == 188) {
-        $('#44').css('background-color', 'pink');
-    } else if (e.which == 190) {
-        $('#46').css('background-color', 'pink');
-    } else if (e.which == 191) {
-        $('#47').css('background-color', 'pink');
-    } else if (e.which == 32) {
-        $('#32').css('background-color', 'pink');
-    }
-    //When the shift key is released, show the lowercase keyboard and hide the uppercase one
-    $(document).keyup(function (e) {
-        if (e.which == 16) {
-            $('#keyboard-upper-container').hide();
-            $('#keyboard-lower-container').show();
-        } else if (e.which == 192) {
-            $('#96').css('background-color', '#f5f5f5');
-        } else if (e.which == 49) {
-            $('#49').css('background-color', '#f5f5f5');
-        } else if (e.which == 50) {
-            $('#50').css('background-color', '#f5f5f5');
-        } else if (e.which == 51) {
-            $('#51').css('background-color', '#f5f5f5');
-        } else if (e.which == 52) {
-            $('#52').css('background-color', '#f5f5f5');
-        } else if (e.which == 53) {
-            $('#53').css('background-color', '#f5f5f5');
-        } else if (e.which == 54) {
-            $('#54').css('background-color', '#f5f5f5');
-        } else if (e.which == 55) {
-            $('#55').css('background-color', '#f5f5f5');
-        } else if (e.which == 81) {
-            $('#113').css('background-color', '#f5f5f5');
-        } else if (e.which == 87) {
-            $('#119').css('background-color', '#f5f5f5');
-        } else if (e.which == 69) {
-            $('#101').css('background-color', '#f5f5f5');
-        } else if (e.which == 82) {
-            $('#114').css('background-color', '#f5f5f5');
-        } else if (e.which == 84) {
-            $('#116').css('background-color', '#f5f5f5');
-        } else if (e.which == 89) {
-            $('#121').css('background-color', '#f5f5f5');
-        } else if (e.which == 85) {
-            $('#117').css('background-color', '#f5f5f5');
-        } else if (e.which == 73) {
-            $('#105').css('background-color', '#f5f5f5');
-        } else if (e.which == 79) {
-            $('#111').css('background-color', '#f5f5f5');
-        } else if (e.which == 80) {
-            $('#112').css('background-color', '#f5f5f5');
-        } else if (e.which == 219) {
-            $('#91').css('background-color', '#f5f5f5');
-        } else if (e.which == 221) {
-            $('#93').css('background-color', '#f5f5f5');
-        } else if (e.which == 220) {
-            $('#92').css('background-color', '#f5f5f5');
-        } else if (e.which == 56) {
-            $('#56').css('background-color', '#f5f5f5');
-        } else if (e.which == 57) {
-            $('#57').css('background-color', '#f5f5f5');
-        } else if (e.which == 48) {
-            $('#48').css('background-color', '#f5f5f5');
-        } else if (e.which == 189) {
-            $('#45').css('background-color', '#f5f5f5');
-        } else if (e.which == 187) {
-            $('#61').css('background-color', '#f5f5f5');
-        } else if (e.which == 65) {
-            $('#97').css('background-color', '#f5f5f5');
-        } else if (e.which == 83) {
-            $('#115').css('background-color', '#f5f5f5');
-        } else if (e.which == 68) {
-            $('#100').css('background-color', '#f5f5f5');
-        } else if (e.which == 70) {
-            $('#102').css('background-color', '#f5f5f5');
-        } else if (e.which == 71) {
-            $('#103').css('background-color', '#f5f5f5');
-        } else if (e.which == 72) {
-            $('#104').css('background-color', '#f5f5f5');
-        } else if (e.which == 74) {
-            $('#106').css('background-color', '#f5f5f5');
-        } else if (e.which == 75) {
-            $('#107').css('background-color', '#f5f5f5');
-        } else if (e.which == 76) {
-            $('#108').css('background-color', '#f5f5f5');
-        } else if (e.which == 186) {
-            $('#59').css('background-color', '#f5f5f5');
-        } else if (e.which == 222) {
-            $('#39').css('background-color', '#f5f5f5');
-        } else if (e.which == 90) {
-            $('#122').css('background-color', '#f5f5f5');
-        } else if (e.which == 88) {
-            $('#120').css('background-color', '#f5f5f5');
-        } else if (e.which == 67) {
-            $('#99').css('background-color', '#f5f5f5');
-        } else if (e.which == 86) {
-            $('#118').css('background-color', '#f5f5f5');
-        } else if (e.which == 66) {
-            $('#98').css('background-color', '#f5f5f5');
-        } else if (e.which == 78) {
-            $('#110').css('background-color', '#f5f5f5');
-        } else if (e.which == 77) {
-            $('#109').css('background-color', '#f5f5f5');
-        } else if (e.which == 188) {
-            $('#44').css('background-color', '#f5f5f5');
-        } else if (e.which == 190) {
-            $('#46').css('background-color', '#f5f5f5');
-        } else if (e.which == 191) {
-            $('#47').css('background-color', '#f5f5f5');
-        } else if (e.which == 32) {
-            $('#32').css('background-color', '#f5f5f5');
+    $(document).keyup(function (shift) { 
+        if (shift.which == 16) { //if shift key is lifted...
+            $('#keyboard-upper-container').hide(); //hide uppercase board
+            $('#keyboard-lower-container').show(); //show lowercase board
         }
     })
 });
 
-//Keys should be highlighed in browser. Matched with ascii code. The id value in HTML corresponds to ASCII code that you can access in the keyboard listener. 
-// a = id 97 , 
+//CHANGE KEY COLOR ON KEYPRESS
+$(document).keypress(function (color) {
+    let keys = $("#" + color.which);
+    $(keys).css("background-color", "#33FF00"); //if key is pressed, change to light green
+    $(document).keyup(function () { 
+        $(keys).css("background-color", "#FFFFFF"); //establish default of key
+    });
+});
 
+//REGISTER KEYPRESSES FOR EACH SENTENCE
+$(document).keypress(function (key) {
+    if (timeClock === false) { //if button pressed...
+        startDate = new Date(); //start the clock
+        startTime = startDate.getTime();
+        timeClock = true;
+
+    }
+    if (key.which == sentence.charCodeAt(letterNumber)) { //if typed key matches correct character ...
+        let correct = ("<span>✅</span>"); //display check
+        letterNumber++; //display next letter
+        highlightPosition += 17.3; //move highlight box # pixels
+        letter = sentence.substring(letterNumber, letterNumber + 1); //change large letter
+        $(targetLetter).text(letter);
+        $(correct).appendTo("#feedback");
+        $(highlight).css('background-color', 'grey'); //keep color of highlighted box
+        $(highlight).css("margin-left", highlightPosition, "px"); //move highlight box
+        if (letterNumber === sentence.length) { //if sentence is finished...
+            sentenceNumber++ //display NEXT sentence
+            if (sentenceNumber === sentences.length) { //if all sentences are complete...
+                let endDate = new Date();
+                let endTime = endDate.getTime();
+                let minutes = (endTime - startTime) / 60000;
+                let wpm = Math.round(54 / minutes - 2 * mistakes); //calculate wpm
+                let wpmMsg = confirm("You typed " + wpm + " words per minute. Press OK to keep practicing.");
+                if (wpmMsg == true) { //if player continues ...
+                    location.reload(); //reload page
+                }
+            } else { 
+                sentence = sentences[sentenceNumber]; //move next sentence
+                $(targetSentence).text(sentence);
+                letterNumber = 0; //start new letter
+                letter = sentence.substring(letterNumber, letterNumber + 1);
+                $(targetLetter).text(letter);
+                highlightPosition = 0; //move highlight to beginning
+                $(highlight).css("margin-left", highlightPosition + "px");
+                $("#feedback").text("");
+            }
+        }
+    } else {  //if typed key is wrong...   
+        let wrong = ("<span>❌</span>"); //display x
+        $(wrong).appendTo("#feedback"); //append
+        $(highlight).css('background-color', 'red'); //change color to red  
+        mistakes++  
+    }
+});

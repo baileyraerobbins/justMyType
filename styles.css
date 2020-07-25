@@ -5,20 +5,28 @@
 
 #prompt-container {
   font-family: Courier New, Courier, monospace;
-  font-size: 24px;
-  letter-spacing: 3px;
+  font-size: 27px;
+  letter-spacing: 1px;
+  color: #33FF00;
 }
 
-#yellow-block {
+
+h1 {
+  color:  black;
+  font-family: Courier New, Courier, monospace;
+  background: #33FF00;
+}
+
+#white-block {
   position: absolute;
+  display: inline-block;
   margin-top: 10px;
-  width: 1px;
+  width: 10px;
   height: 15px;
-  background-color: yellow;
 }
 
 .keyboard-container {
-  margin-top: 200px;
+  margin-top: 130px;
 }
 
 #target-letter {
@@ -28,19 +36,14 @@
 .keys-row {
   margin-top: 40px;
   padding: 10px 0;
+  color: black;
 }
 
 #feedback {
-  font-size: 20px;
-}
-.glyphicon-ok {
-  color: #1DA237
-}
-
-.glyphicon-remove {
-  color : #CD2626
+  font-size: 12px;
 }
 
 body {
-  background-color: darkseagreen
+  background-color: black;
 }
+
